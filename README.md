@@ -46,7 +46,7 @@ src/
 
 1. Clone the repository
    ```
-   git clone https://github.com/your-username/gantt-route-planner.git
+   git clone https://github.com/thecryptoeditor/route-planning.git
    cd gantt-route-planner
    ```
 
@@ -89,12 +89,3 @@ The application features a custom zoom control with three predefined levels:
 - Small: 1-hour view
 
 The zoom functionality is implemented using the vis-timeline's window API, adjusting the visible time range based on the selected zoom level.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgements
-
-- vis-timeline library for the Gantt chart visualization
-- date-fns for date manipulation utilities
