@@ -29,6 +29,7 @@
   font-size: 12px;
   color: white;
   font-weight: bold;
+  justify-content: center;
 }
 
 .vis-item.vis-selected {
@@ -174,3 +175,286 @@
 .vis-item {
   backface-visibility: hidden;
 }
+
+
+
+/* Override vis-timeline styles to match the design */
+.vis-timeline {
+  border: none;
+  font-family: inherit;
+  background-color: #fff; /* White background */
+  overflow: visible !important;
+}
+
+.vis-time-axis .vis-text {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.vis-time-axis .vis-grid.vis-minor {
+  border-color: #e5e5e5;
+}
+
+.vis-time-axis .vis-grid.vis-major {
+  border-color: #d0d0d0;
+}
+
+/* Hide the date row */
+.vis-time-axis.vis-foreground .vis-major {
+  display: none;
+}
+
+/* Rounded background for each route row */
+.vis-group {
+  border-bottom: none !important; /* Remove bottom border */
+  background-color: transparent !important; /* Make background transparent */
+  /* position: relative; */
+  margin: 40px 0 !important; /* Changed from 4px to 40px for bigger spacing */
+  height: 40px !important; /* Keep height at 40px */
+  overflow: visible !important;
+}
+
+/* Make sure foreground content is above the background */
+.vis-foreground {
+  z-index: 10 !important;
+  position: relative !important;
+}
+
+/* Route background - rounded gray area */
+.route-row-background {
+  position: absolute;
+  top: 0px;
+  bottom: 0px; /* Adjusted from 3px to 0px for full height */
+  left: 0;
+  right: 0;
+  background-color: #f2f3f5; /* Light gray background */
+  border-radius: 20px; /* Rounded corners */
+  z-index: 1;
+}
+
+/* Hide route labels */
+.vis-labelset .vis-label {
+  padding: 8px;
+  font-weight: bold;
+  border-bottom: none;
+  color: transparent;
+  background-color: transparent !important;
+}
+
+.vis-labelset .vis-label .vis-inner {
+  width: 0;
+  visibility: hidden;
+}
+
+/* Reduce the width of the label column */
+.vis-labelset {
+  width: 10px !important;
+  border: none !important;
+}
+
+/* Background route line */
+.route-background-line {
+  position: absolute;
+  height: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 32px;
+  right: 32px;
+  z-index: 5;
+  border-radius: 3px;
+}
+
+/* Route line colors */
+.route-pink .route-background-line {
+  background-color: #e91e63;
+}
+.route-blue .route-background-line {
+  background-color: #2196f3;
+}
+.route-yellow .route-background-line {
+  background-color: #ffc107;
+}
+.route-green .route-background-line {
+  background-color: #4caf50;
+}
+.route-purple .route-background-line {
+  background-color: #9c27b0;
+}
+.route-brown .route-background-line {
+  background-color: #795548;
+}
+.route-lime .route-background-line {
+  background-color: #8bc34a;
+}
+.route-dark-green .route-background-line {
+  background-color: #2e7d32;
+}
+.route-indigo .route-background-line {
+  background-color: #3f51b5;
+}
+.route-navy .route-background-line {
+  background-color: #1a237e;
+}
+
+/* Text colors for items matching route colors */
+.route-pink .vis-item .vis-item-content::after {
+  color: #e91e63;
+  border-color: #e91e63;
+}
+.route-blue .vis-item .vis-item-content::after {
+  color: #2196f3;
+  border-color: #2196f3;
+}
+.route-yellow .vis-item .vis-item-content::after {
+  color: #ffc107;
+  border-color: #ffc107;
+}
+.route-green .vis-item .vis-item-content::after {
+  color: #4caf50;
+  border-color: #4caf50;
+}
+.route-purple .vis-item .vis-item-content::after {
+  color: #9c27b0;
+  border-color: #9c27b0;
+}
+.route-brown .vis-item .vis-item-content::after {
+  color: #795548;
+  border-color: #795548;
+}
+.route-lime .vis-item .vis-item-content::after {
+  color: #8bc34a;
+  border-color: #8bc34a;
+}
+.route-dark-green .vis-item .vis-item-content::after {
+  color: #2e7d32;
+  border-color: #2e7d32;
+}
+.route-indigo .vis-item .vis-item-content::after {
+  color: #3f51b5;
+  border-color: #3f51b5;
+}
+.route-navy .vis-item .vis-item-content::after {
+  color: #1a237e;
+  border-color: #1a237e;
+}
+
+/* Customize home icons at the start of routes */
+.route-start-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px; /* Slightly larger */
+  height: 26px; /* Slightly larger */
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 15;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.route-start-icon svg {
+  width: 16px; /* Slightly larger */
+  height: 16px; /* Slightly larger */
+  color: #e53935;
+}
+
+/* Custom class for our timeline items */
+.gantt-order-item {
+  color: inherit; /* Use the color from parent route */
+}
+
+/* Additional styling for vis items */
+.vis-item.vis-range {
+  /* border-radius: 50% !important; */
+  text-align: center;
+}
+
+/* Style for the timeline grid */
+.vis-panel.vis-center,
+.vis-panel.vis-left,
+.vis-panel.vis-right {
+  border-color: #eee;
+}
+
+/* Customize the date header at the top */
+.vis-time-axis.vis-foreground {
+  font-weight: 600;
+}
+
+/* Fix for Firefox */
+.vis-item {
+  backface-visibility: hidden;
+}
+
+/* Remove box shadows from panels */
+.vis-panel {
+  box-shadow: none !important;
+}
+
+/* Main timeline container */
+.vis-timeline {
+  box-shadow: none !important;
+  border-radius: 12px;
+  overflow: visible !important;
+}
+
+/* Ensure vis-panel foreground is above background */
+.vis-panel.vis-center,
+.vis-panel.vis-center .vis-content,
+.vis-panel.vis-center .vis-itemset,
+.vis-panel.vis-center .vis-foreground {
+  z-index: 10 !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+
+/* Ensure all vis items appear above route backgrounds */
+.vis-panel.vis-center .vis-content .vis-item {
+  z-index: 30 !important;
+  overflow: visible !important;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Style for large item numbers - increase z-index */
+.vis-item.large-item {
+  width: 30px !important;
+  height: 30px !important;
+  z-index: 32 !important;
+}
+
+/* Make sure content elements are visible */
+.vis-item.vis-point {
+  overflow: visible !important;
+  z-index: 30 !important;
+}
+
+.vis-item.vis-point .vis-item-content,
+.vis-item.vis-point .vis-dot,
+.vis-item.vis-point .vis-item-content::after {
+  overflow: visible !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: flex !important;
+}
+
+/* Ensure large and highlighted items work with range events */
+.vis-item.vis-range.large-item .vis-item-content::after {
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
+}
+
+.vis-item.vis-range.highlight-item .vis-item-content::after {
+  background-color: #e53935 !important;
+  color: white !important;
+  box-shadow: 0 2px 4px rgba(229, 57, 53, 0.3);
+  border-color: #e53935 !important;
+}
+
