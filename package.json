@@ -19,6 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deployprod": "rm -rf build/ && rm -r dist.zip && npm run build && zip -r dist.zip build && scp dist.zip sample-app-01:/home/ubuntu/app-build/ && ssh sample-app-01 -t \"cd app-build && rm -r build/ && unzip dist.zip\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
