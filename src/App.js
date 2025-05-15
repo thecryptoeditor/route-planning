@@ -1,11 +1,11 @@
 import React from 'react';
-import GanttChart from './components/GanttChart';
+import './App.css';
+import Layout from './components/Layout/Layout';
 
 function App() {
   return (
-    <div>
-      <h1>Route Planning Gantt View</h1>
-      <GanttChart />
+    <div className="App">
+      <Layout />
     </div>
   );
 }
