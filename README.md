@@ -22,7 +22,6 @@ The project follows a modular, component-based architecture:
 src/
 ├── components/         # UI components
 │   ├── GanttChart/     # Gantt chart components
-│   ├── RouteList/      # Route listing components
 │   └── Layout/         # Layout components
 ├── utils/              # Utility functions for data transformation and time handling
 ├── hooks/              # Custom React hooks
