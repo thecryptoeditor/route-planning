@@ -52,22 +52,6 @@ export const transformDataForGantt = (data) => {
         className: 'gantt-order-item'
       });
     });
-    
-    // Add number markers for each route
-    for (let i = 1; i <= 7; i++) {
-      // Create markers at regular intervals
-      const markerTime = new Date(baseDate);
-      markerTime.setHours(8 + i, 0, 0, 0); // Start at 9:00 AM (8+1)
-      
-      items.push({
-        id: `${routeId}-marker-${i}`,
-        group: routeId,
-        content: `${i}`,
-        start: markerTime,
-        type: 'point',
-        className: 'number-marker'
-      });
-    }
   });
   
   return { groups, items };

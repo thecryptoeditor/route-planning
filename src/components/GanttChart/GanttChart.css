@@ -145,33 +145,7 @@
   background-color: #1a237e !important;
 }
 
-/* Style for number markers */
-.vis-item.number-marker {
-  background-color: transparent !important;
-  box-shadow: none;
-  color: #333;
-  font-weight: bold;
-  font-size: 12px;
-  width: 20px !important;
-  height: 20px !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  z-index: 5;
-}
-
-.vis-item.number-marker .vis-item-content {
-  color: #333;
-  background: white;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
+/* Style for number markers - removed */
 
 /* Additional styling for vis items */
 .vis-item.vis-range {
