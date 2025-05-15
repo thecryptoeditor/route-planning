@@ -43,7 +43,7 @@ export const transformDataForGantt = (data) => {
       items.push({
         id: `${routeId}-order-${orderData.seq}`,
         group: routeId,
-        content: `Order ${orderData.seq}`,
+        content: `${orderData.seq}`,
         start: startTime,
         end: endTime,
         title: `Order ${orderData.seq}: ${orderData.start_time} - ${orderData.end_time}`,
@@ -52,6 +52,22 @@ export const transformDataForGantt = (data) => {
         className: 'gantt-order-item'
       });
     });
+    
+    // Add number markers for each route
+    for (let i = 1; i <= 7; i++) {
+      // Create markers at regular intervals
+      const markerTime = new Date(baseDate);
+      markerTime.setHours(8 + i, 0, 0, 0); // Start at 9:00 AM (8+1)
+      
+      items.push({
+        id: `${routeId}-marker-${i}`,
+        group: routeId,
+        content: `${i}`,
+        start: markerTime,
+        type: 'point',
+        className: 'number-marker'
+      });
+    }
   });
   
   return { groups, items };
@@ -66,11 +82,16 @@ export const transformDataForGantt = (data) => {
 const getOrderColor = (routeIndex, orderIndex) => {
   // Base colors for routes (can be expanded)
   const baseColors = [
-    '#1976d2', // Blue
-    '#388e3c', // Green
-    '#d32f2f', // Red
-    '#7b1fa2', // Purple
-    '#f57c00'  // Orange
+    '#e91e63', // Pink
+    '#2196f3', // Blue
+    '#ffc107', // Yellow
+    '#4caf50', // Green
+    '#9c27b0', // Purple
+    '#795548', // Brown
+    '#8bc34a', // Lime
+    '#2e7d32', // Dark Green
+    '#3f51b5', // Indigo
+    '#1a237e'  // Navy
   ];
   
   // Get base color for the route
@@ -101,7 +122,7 @@ export const calculateTimeWindow = (items) => {
   
   items.forEach(item => {
     const itemStart = new Date(item.start);
-    const itemEnd = new Date(item.end);
+    const itemEnd = new Date(item.end || item.start); // For point items
     
     if (itemStart < earliest) earliest = itemStart;
     if (itemEnd > latest) latest = itemEnd;

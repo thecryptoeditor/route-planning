@@ -10,16 +10,18 @@
 
 .gantt-chart {
   flex: 1;
-  min-height: 400px;
-  border: 1px solid #ddd;
+  min-height: 600px;
+  border: 1px solid #eee;
   background-color: #fff;
+  overflow: visible;
 }
 
 /* Customize vis-timeline elements */
 .vis-item {
   border-color: transparent;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  height: 28px !important;
 }
 
 .vis-item .vis-item-content {
@@ -34,43 +36,11 @@
   box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.4);
 }
 
-.timeline-legend {
-  display: flex;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  background-color: #f9f9f9;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  margin-right: 20px;
-}
-
-.legend-color {
-  width: 16px;
-  height: 16px;
-  border-radius: 3px;
-  margin-right: 8px;
-}
-
-.legend-label {
-  font-size: 14px;
-  color: #333;
-}
-
-.chart-info {
-  padding: 12px;
-  background-color: #f5f5f5;
-  border-top: 1px solid #ddd;
-  font-size: 13px;
-  color: #666;
-}
-
-/* Override vis-timeline styles for better readability */
+/* Override vis-timeline styles to match the design */
 .vis-timeline {
   border: none;
   font-family: inherit;
+  background-color: #f9f9f9;
 }
 
 .vis-time-axis .vis-text {
@@ -78,8 +48,26 @@
   color: #666;
 }
 
+.vis-time-axis .vis-grid.vis-minor {
+  border-color: #e5e5e5;
+}
+
+.vis-time-axis .vis-grid.vis-major {
+  border-color: #d0d0d0;
+}
+
+/* Hide the date row */
+.vis-time-axis.vis-foreground .vis-major {
+  display: none;
+}
+
 .vis-group {
   border-bottom: 1px solid #f0f0f0;
+  background-color: #f9f9f9;
+}
+
+.vis-group:nth-child(odd) {
+  background-color: rgba(240, 240, 240, 0.4);
 }
 
 .vis-labelset .vis-label {
@@ -88,7 +76,127 @@
   border-bottom: 1px solid #f0f0f0;
 }
 
+/* Customize home icons at the start of routes */
+.route-start-icon {
+  position: absolute;
+  left: -18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border: 1px solid #ddd;
+}
+
+.route-start-icon svg {
+  width: 12px;
+  height: 12px;
+  color: #999;
+}
+
 /* Custom class for our timeline items */
 .gantt-order-item {
   color: white;
+}
+
+/* Custom color schemes for different routes */
+.route-pink .vis-item {
+  background-color: #e91e63 !important;
+}
+
+.route-blue .vis-item {
+  background-color: #2196f3 !important;
+}
+
+.route-yellow .vis-item {
+  background-color: #ffc107 !important;
+}
+
+.route-green .vis-item {
+  background-color: #4caf50 !important;
+}
+
+.route-purple .vis-item {
+  background-color: #9c27b0 !important;
+}
+
+.route-brown .vis-item {
+  background-color: #795548 !important;
+}
+
+.route-lime .vis-item {
+  background-color: #8bc34a !important;
+}
+
+.route-dark-green .vis-item {
+  background-color: #2e7d32 !important;
+}
+
+.route-indigo .vis-item {
+  background-color: #3f51b5 !important;
+}
+
+.route-navy .vis-item {
+  background-color: #1a237e !important;
+}
+
+/* Style for number markers */
+.vis-item.number-marker {
+  background-color: transparent !important;
+  box-shadow: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 12px;
+  width: 20px !important;
+  height: 20px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  z-index: 5;
+}
+
+.vis-item.number-marker .vis-item-content {
+  color: #333;
+  background: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Additional styling for vis items */
+.vis-item.vis-range {
+  height: 28px;
+  border-radius: 14px;
+}
+
+.vis-item .timeline-item-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  font-weight: bold;
+  color: white;
+}
+
+/* Style for the timeline grid */
+.vis-panel.vis-center,
+.vis-panel.vis-left,
+.vis-panel.vis-right {
+  border-color: #eee;
+}
+
+/* Fix for Firefox */
+.vis-item {
+  backface-visibility: hidden;
 }

@@ -6,12 +6,25 @@ import './GanttChart.css';
 import TimeRangeSlider from './TimeRangeSlider';
 import useGanttData from '../../hooks/useGanttData';
 
+// Define route colors for consistent styling
+const ROUTE_COLORS = [
+  'route-pink',
+  'route-blue',
+  'route-yellow',
+  'route-green',
+  'route-purple',
+  'route-brown',
+  'route-lime',
+  'route-dark-green',
+  'route-indigo',
+  'route-navy'
+];
+
 /**
  * GanttChart component that displays route and order data in a timeline
  * @param {Object} props - Component props
  * @param {Object} props.data - The input data with routes and orders
  */
-
 const GanttChart = ({ data }) => {
   const timelineRef = useRef(null);
   const containerRef = useRef(null);
@@ -36,7 +49,7 @@ const GanttChart = ({ data }) => {
         stack: true,
         stackSubgroups: true,
         verticalScroll: true,
-        maxHeight: '600px',
+        maxHeight: '800px',
         horizontalScroll: true,
         zoomKey: 'ctrlKey',
         orientation: 'top',
@@ -49,6 +62,17 @@ const GanttChart = ({ data }) => {
           minorLabels: {
             minute: 'h:mm a',
             hour: 'h:mm a'
+          },
+          majorLabels: {
+            millisecond: '',
+            second: '',
+            minute: '',
+            hour: '',
+            weekday: '',
+            day: '',
+            week: '',
+            month: '',
+            year: ''
           }
         },
         snap: null, // Don't snap when moving items
@@ -57,6 +81,9 @@ const GanttChart = ({ data }) => {
           item: {
             horizontal: 10,
           }
+        },
+        template: function (item) {
+          return `<div class="timeline-item-content">${item.content}</div>`;
         }
       };
       
@@ -76,10 +103,24 @@ const GanttChart = ({ data }) => {
         // This fires when the timeline's visible range changes
         console.log('Range changed:', properties);
       });
+      
+      // After the timeline renders, add home icons to each route
+      setTimeout(() => {
+        addRouteIcons();
+        // Hide the date row
+        hideTimelineDate();
+      }, 100);
+      
     } else if (timeline) {
       // Update data if timeline already exists
       timeline.setGroups(groups);
       timeline.setItems(items);
+      
+      // Re-add home icons after data updates
+      setTimeout(() => {
+        addRouteIcons();
+        hideTimelineDate();
+      }, 100);
     }
   }, [ganttData, timeline]);
   
@@ -92,21 +133,44 @@ const GanttChart = ({ data }) => {
     }
   }, [timeline, timeWindow]);
   
+  // Add home icons to the beginning of each route
+  const addRouteIcons = () => {
+    // Get all route containers
+    const routeElements = document.querySelectorAll('.vis-group');
+    
+    routeElements.forEach((route, index) => {
+      // Add route color class to group
+      route.classList.add(ROUTE_COLORS[index % ROUTE_COLORS.length]);
+      
+      // Check if we already added an icon
+      if (route.querySelector('.route-start-icon')) {
+        return;
+      }
+      
+      // Create and add home icon
+      const iconContainer = document.createElement('div');
+      iconContainer.className = 'route-start-icon';
+      iconContainer.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+        </svg>
+      `;
+      
+      route.appendChild(iconContainer);
+    });
+  };
+  
+  // Hide the date row in the timeline
+  const hideTimelineDate = () => {
+    const dateRow = document.querySelector('.vis-time-axis.vis-foreground .vis-major');
+    if (dateRow) {
+      dateRow.style.display = 'none';
+    }
+  };
+  
   return (
     <div className="gantt-chart-container">
       <TimeRangeSlider zoomLevel={zoomLevel} onZoomChange={handleZoomChange} />
-      
-      <div className="timeline-legend">
-        <div className="legend-item">
-          <div className="legend-color" style={{ backgroundColor: '#1976d2' }}></div>
-          <div className="legend-label">Route 1</div>
-        </div>
-        <div className="legend-item">
-          <div className="legend-color" style={{ backgroundColor: '#388e3c' }}></div>
-          <div className="legend-label">Route 2</div>
-        </div>
-      </div>
-      
       <div className="gantt-chart" ref={containerRef}></div>
     </div>
   );
