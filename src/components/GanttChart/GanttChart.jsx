@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Timeline } from "vis-timeline/standalone";
 import { DataSet } from "vis-data";
-import "vis-timeline/styles/vis-timeline-graph2d.css";
+// import "vis-timeline/styles/vis-timeline-graph2d.css";
 import './GanttChart.css';
 import TimeRangeSlider from './TimeRangeSlider';
 import useGanttData from '../../hooks/useGanttData';
@@ -46,18 +46,13 @@ const GanttChart = ({ data }) => {
     // Initialize timeline if it doesn't exist
     if (!timeline && containerRef.current) {
       const options = {
-        stack: true,
+        stack: false,
         stackSubgroups: true,
         verticalScroll: true,
         maxHeight: '800px',
         horizontalScroll: true,
         zoomKey: 'ctrlKey',
         orientation: 'top',
-        showTooltips: true,
-        tooltip: {
-          followMouse: true,
-          overflowMethod: 'flip'
-        },
         format: {
           minorLabels: {
             minute: 'h:mm a',
@@ -285,11 +280,11 @@ const GanttChart = ({ data }) => {
       // Create and add home icon
       const iconContainer = document.createElement('div');
       iconContainer.className = 'route-start-icon';
-      iconContainer.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-        </svg>
-      `;
+      // iconContainer.innerHTML = `
+      //   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+      //     <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+      //   </svg>
+      // `;
       
       route.appendChild(iconContainer);
     });
