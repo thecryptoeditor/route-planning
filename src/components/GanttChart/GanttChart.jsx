@@ -136,11 +136,11 @@ const GanttChart = ({ data }) => {
     cleanupExistingStyles();
     
     // Then apply all styling in sequence
-    addRouteBackgrounds();
+    // addRouteBackgrounds();
     addRouteIcons();
     addBackgroundLines();
-    hideTimelineDate();
-    ensureItemContentVisible();
+    // hideTimelineDate();
+    // ensureItemContentVisible();
   };
   
   // Clean up existing styling elements to prevent duplication
@@ -162,72 +162,72 @@ const GanttChart = ({ data }) => {
   };
 
   // Ensure item content (numbers) remain visible during horizontal scrolling
-  const ensureItemContentVisible = () => {
-    if (!timeline) return;
+  // const ensureItemContentVisible = () => {
+  //   if (!timeline) return;
     
-    try {
-      // Select all timeline items
-      const timelineItems = document.querySelectorAll('.vis-item');
+  //   try {
+  //     // Select all timeline items
+  //     const timelineItems = document.querySelectorAll('.vis-item');
       
-      // Add 'keep-content-visible' class to all items
-      timelineItems.forEach(item => {
-        if (!item.classList.contains('keep-content-visible')) {
-          item.classList.add('keep-content-visible');
-        }
+  //     // Add 'keep-content-visible' class to all items
+  //     timelineItems.forEach(item => {
+  //       if (!item.classList.contains('keep-content-visible')) {
+  //         item.classList.add('keep-content-visible');
+  //       }
         
-        // Add vis-point class to ensure proper styling for points
-        if (!item.classList.contains('vis-point')) {
-          item.classList.add('vis-point');
-        }
+  //       // Add vis-point class to ensure proper styling for points
+  //       if (!item.classList.contains('vis-point')) {
+  //         item.classList.add('vis-point');
+  //       }
         
-        // Find the content element
-        const content = item.querySelector('.timeline-item-content, .vis-item-content');
-        if (!content) return;
+  //       // Find the content element
+  //       const content = item.querySelector('.timeline-item-content, .vis-item-content');
+  //       if (!content) return;
         
-        // Get the original content from the item's data
-        const itemId = item.getAttribute('data-id');
-        if (!itemId) return;
+  //       // Get the original content from the item's data
+  //       const itemId = item.getAttribute('data-id');
+  //       if (!itemId) return;
         
-        try {
-          const itemData = timeline.itemsData.get(itemId);
+  //       try {
+  //         const itemData = timeline.itemsData.get(itemId);
           
-          // Use originalContent property or fallback to item.content
-          let displayContent = '';
-          if (itemData && itemData.originalContent) {
-            displayContent = itemData.originalContent;
-          } else if (itemData && itemData.content) {
-            displayContent = itemData.content;
-          }
+  //         // Use originalContent property or fallback to item.content
+  //         let displayContent = '';
+  //         if (itemData && itemData.originalContent) {
+  //           displayContent = itemData.originalContent;
+  //         } else if (itemData && itemData.content) {
+  //           displayContent = itemData.content;
+  //         }
           
-          // Set the data-content attribute only if we have content
-          if (displayContent) {
-            content.setAttribute('data-content', displayContent);
-            // Add the actual content inside the element too
-            content.textContent = displayContent;
-          }
+  //         // Set the data-content attribute only if we have content
+  //         if (displayContent) {
+  //           content.setAttribute('data-content', displayContent);
+  //           // Add the actual content inside the element too
+  //           content.textContent = displayContent;
+  //         }
           
-          // Ensure visibility
-          content.style.display = 'flex';
-          content.style.visibility = 'visible';
-          content.style.opacity = '1';
-          content.style.zIndex = '35';
+  //         // Ensure visibility
+  //         content.style.display = 'flex';
+  //         content.style.visibility = 'visible';
+  //         content.style.opacity = '1';
+  //         content.style.zIndex = '35';
           
-          // Keep original position (don't override timeline's positioning)
-          // Make sure the item stays positioned by time
-          item.style.position = 'absolute';
+  //         // Keep original position (don't override timeline's positioning)
+  //         // Make sure the item stays positioned by time
+  //         item.style.position = 'absolute';
           
-          // Ensure the parent item is also visible
-          item.style.display = 'flex';
-          item.style.visibility = 'visible';
-          item.style.opacity = '1';
-        } catch (err) {
-          console.warn('Error processing item:', err);
-        }
-      });
-    } catch (error) {
-      console.error('Error in ensureItemContentVisible:', error);
-    }
-  };
+  //         // Ensure the parent item is also visible
+  //         item.style.display = 'flex';
+  //         item.style.visibility = 'visible';
+  //         item.style.opacity = '1';
+  //       } catch (err) {
+  //         console.warn('Error processing item:', err);
+  //       }
+  //     });
+  //   } catch (error) {
+  //     console.error('Error in ensureItemContentVisible:', error);
+  //   }
+  // };
 
   // Add horizontal lines to each route
   const addBackgroundLines = () => {
@@ -260,12 +260,16 @@ const GanttChart = ({ data }) => {
     const routeElements = document.querySelectorAll('.vis-group');
     
     routeElements.forEach(route => {
-      // Create a background for each route
-      const background = document.createElement('div');
-      background.className = 'route-row-background';
-      
-      // Insert at the beginning of the route element to ensure it's behind other elements
-      route.insertBefore(background, route.firstChild);
+      // Check if background already exists
+      const existingBackground = route.querySelector('.route-row-background');
+      if (!existingBackground) {
+        // Create a background for each route only if it doesn't exist
+        const background = document.createElement('div');
+        background.className = 'route-row-background';
+        
+        // Insert at the beginning of the route element to ensure it's behind other elements
+        route.insertBefore(background, route.firstChild);
+      }
     });
   };
   
@@ -292,12 +296,12 @@ const GanttChart = ({ data }) => {
   };
   
   // Hide the date row in the timeline
-  const hideTimelineDate = () => {
-    const dateRow = document.querySelector('.vis-time-axis.vis-foreground .vis-major');
-    if (dateRow) {
-      dateRow.style.display = 'none';
-    }
-  };
+  // const hideTimelineDate = () => {
+  //   const dateRow = document.querySelector('.vis-time-axis.vis-foreground .vis-major');
+  //   if (dateRow) {
+  //     dateRow.style.display = 'none';
+  //   }
+  // };
   
   return (
     <div className="gantt-chart-container">
