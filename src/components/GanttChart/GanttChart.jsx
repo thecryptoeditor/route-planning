@@ -43,7 +43,7 @@ const GanttChart = ({ data }) => {
         horizontalScroll: true,
         zoomKey: 'ctrlKey',
         orientation: 'top',
-        minHeight: '1000px',
+        minHeight: '100vh',
         format: {
           minorLabels: {
             minute: 'h:mm a',
