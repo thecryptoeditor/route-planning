@@ -104,16 +104,9 @@ const GanttChart = ({ data }) => {
         console.log('Range changed:', properties);
       });
       
-      // After the timeline renders, add home icons to each route
+      // After the timeline renders, apply styling enhancements
       setTimeout(() => {
-        addRouteIcons();
-        addRouteBackgrounds();
-        addRouteIcons();
-        addBackgroundLines();
-        // Hide the date row
-        hideTimelineDate();
-        // Ensure content is visible initially
-        ensureItemContentVisible();
+        applyTimelineStyling();
       }, 100);
       
     } else if (timeline) {
@@ -121,14 +114,9 @@ const GanttChart = ({ data }) => {
       timeline.setGroups(groups);
       timeline.setItems(items);
       
-      // Re-add home icons after data updates
+      // Re-apply styling after data updates
       setTimeout(() => {
-        addRouteIcons();
-        addRouteBackgrounds();
-        addRouteIcons();
-        addBackgroundLines();
-        hideTimelineDate();
-        ensureItemContentVisible();
+        applyTimelineStyling();
       }, 100);
     }
   }, [ganttData, timeline]);
@@ -142,7 +130,38 @@ const GanttChart = ({ data }) => {
     }
   }, [timeline, timeWindow]);
 
-    // Ensure item content (numbers) remain visible during horizontal scrolling
+  // Combined function to apply all styling at once to prevent duplication
+  const applyTimelineStyling = () => {
+    // First, clean up any existing styling elements to prevent duplication
+    cleanupExistingStyles();
+    
+    // Then apply all styling in sequence
+    addRouteBackgrounds();
+    addRouteIcons();
+    addBackgroundLines();
+    hideTimelineDate();
+    ensureItemContentVisible();
+  };
+  
+  // Clean up existing styling elements to prevent duplication
+  const cleanupExistingStyles = () => {
+    // Remove existing background lines
+    document.querySelectorAll('.route-background-line').forEach(line => {
+      line.remove();
+    });
+    
+    // Remove existing backgrounds
+    document.querySelectorAll('.route-row-background').forEach(bg => {
+      bg.remove();
+    });
+    
+    // Remove existing icons
+    document.querySelectorAll('.route-start-icon').forEach(icon => {
+      icon.remove();
+    });
+  };
+
+  // Ensure item content (numbers) remain visible during horizontal scrolling
   const ensureItemContentVisible = () => {
     if (!timeline) return;
     
@@ -210,12 +229,8 @@ const GanttChart = ({ data }) => {
     }
   };
 
+  // Add horizontal lines to each route
   const addBackgroundLines = () => {
-    // Clear existing background lines
-    document.querySelectorAll('.route-background-line').forEach(line => {
-      line.remove();
-    });
-    
     // Get all route containers
     const routeElements = document.querySelectorAll('.vis-group');
     
@@ -239,13 +254,8 @@ const GanttChart = ({ data }) => {
     });
   };
 
-
-    const addRouteBackgrounds = () => {
-    // Clear existing backgrounds
-    document.querySelectorAll('.route-row-background').forEach(bg => {
-      bg.remove();
-    });
-    
+  // Add gray background to each route row
+  const addRouteBackgrounds = () => {
     // Get all route containers
     const routeElements = document.querySelectorAll('.vis-group');
     
@@ -267,11 +277,6 @@ const GanttChart = ({ data }) => {
     routeElements.forEach((route, index) => {
       // Add route color class to group
       route.classList.add(ROUTE_COLORS[index % ROUTE_COLORS.length]);
-      
-      // Check if we already added an icon
-      if (route.querySelector('.route-start-icon')) {
-        return;
-      }
       
       // Create and add home icon
       const iconContainer = document.createElement('div');
