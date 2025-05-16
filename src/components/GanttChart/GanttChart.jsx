@@ -16,7 +16,7 @@ const ROUTE_COLORS = [
   'route-lime',
   'route-dark-green',
   'route-indigo',
-  'route-navy'
+  // 'route-navy'
 ];
 
 const GanttChart = ({ data }) => {
@@ -84,18 +84,16 @@ const GanttChart = ({ data }) => {
       setTimeline(newTimeline);
       timelineRef.current = newTimeline;
       
-      setTimeout(() => {
-        applyTimelineStyling();
-      }, 100);
-      
     } else if (timeline) {
       timeline.setGroups(groups);
       timeline.setItems(items);
-      
-      setTimeout(() => {
-        applyTimelineStyling();
-      }, 100);
     }
+
+    // Adding effects by CSS
+    setTimeout(() => {
+      applyTimelineStyling();
+    }, 100);
+
   }, [ganttData, timeline]);
   
   useEffect(() => {
@@ -112,6 +110,26 @@ const GanttChart = ({ data }) => {
     addRouteIcons();
     addBackgroundLines();
   };
+
+    // Add home icons to the beginning of each route
+    const addRouteIcons = () => {
+      const routeElements = document.querySelectorAll('.vis-group');
+      console.log('routeElements', routeElements);
+      routeElements.forEach((route, index) => {
+        route.classList.add(ROUTE_COLORS[index % ROUTE_COLORS.length]);
+        
+        // Create and add home icon
+        const iconContainer = document.createElement('div');
+        iconContainer.className = 'route-start-icon';
+        iconContainer.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+          </svg>
+        `;
+        
+        route.appendChild(iconContainer);
+      });
+    };
   
 
   // Add horizontal lines to each route
@@ -133,25 +151,6 @@ const GanttChart = ({ data }) => {
       } else {
         route.appendChild(line);
       }
-    });
-  };
-  
-  // Add home icons to the beginning of each route
-  const addRouteIcons = () => {
-    const routeElements = document.querySelectorAll('.vis-group');
-    routeElements.forEach((route, index) => {
-      route.classList.add(ROUTE_COLORS[index % ROUTE_COLORS.length]);
-      
-      // Create and add home icon
-      const iconContainer = document.createElement('div');
-      iconContainer.className = 'route-start-icon';
-      iconContainer.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-        </svg>
-      `;
-      
-      route.appendChild(iconContainer);
     });
   };
   
