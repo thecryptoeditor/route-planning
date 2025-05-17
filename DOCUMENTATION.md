@@ -96,37 +96,6 @@ The Gantt chart expects data in the following format:
 }
 ```
 
-## Customization
-
-### Styling
-- The Gantt chart's appearance can be customized through `GanttChart.css`
-- Timeline items use custom CSS classes for styling
-- Responsive design considerations are included
-
-### Configuration Options
-The Gantt chart supports various configuration options:
-- Stack mode (enabled/disabled)
-- Vertical/horizontal scrolling
-- Custom tooltips
-- Time axis formatting
-- Item templates
-
-## Best Practices
-
-1. Data Management:
-   - Keep data transformations in the useGanttData hook
-   - Use proper data structures (DataSet) for optimal performance
-
-2. Performance:
-   - Implement proper memoization for callbacks
-   - Use appropriate zoom levels for large datasets
-   - Optimize rendering with proper key props
-
-3. UI/UX:
-   - Maintain consistent styling
-   - Provide clear visual feedback for interactions
-   - Ensure responsive design works across devices
-
 ## Application Logic
 
 ### 1. Data Flow Architecture
