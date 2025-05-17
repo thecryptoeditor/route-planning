@@ -58,7 +58,7 @@
   color: #666;
   font-size: 0.9rem;
 }
-/* Date display at the top */
+
 .date-display {
   color: #333;
   font-weight: 600;
@@ -69,7 +69,6 @@
   position: relative;
 }
 
-/* Circular handle for time slider */
 .time-slider-handle {
   position: absolute;
   top: 50%;
@@ -85,7 +84,6 @@
   pointer-events: none;
 }
 
-/* Top time indicators */
 .time-indicators {
   display: flex;
   justify-content: space-between;
@@ -100,7 +98,6 @@
   text-align: center;
 }
 
-/* Time scale marks */
 .time-marks {
   display: flex;
   justify-content: space-between;
@@ -118,7 +115,6 @@
   background-color: #ccc;
 }
 
-/* Top range display with drag handle */
 .range-display {
   position: absolute;
   top: -24px;

@@ -5,20 +5,6 @@ import './GanttChart.css';
 import TimeRangeSlider from './TimeRangeSlider';
 import useGanttData from '../../hooks/useGanttData';
 
-// Route colors for consistent styling
-const ROUTE_COLORS = [
-  'route-pink',
-  'route-blue',
-  'route-yellow',
-  'route-green',
-  'route-purple',
-  'route-brown',
-  'route-lime',
-  'route-dark-green',
-  'route-indigo',
-  // 'route-navy'
-];
-
 const GanttChart = ({ data }) => {
   const timelineRef = useRef(null);
   const containerRef = useRef(null);
@@ -43,7 +29,12 @@ const GanttChart = ({ data }) => {
         horizontalScroll: true,
         zoomKey: 'ctrlKey',
         orientation: 'top',
-        minHeight: '100vh',
+        minHeight: '600px',
+        showTooltips: true,
+        tooltip: {
+          followMouse: false,
+          delay: 10
+        },
         format: {
           minorLabels: {
             minute: 'h:mm a',
@@ -88,12 +79,6 @@ const GanttChart = ({ data }) => {
       timeline.setGroups(groups);
       timeline.setItems(items);
     }
-
-    // Adding effects by CSS
-    setTimeout(() => {
-      applyTimelineStyling();
-    }, 100);
-
   }, [ganttData, timeline]);
   
   useEffect(() => {
@@ -103,57 +88,6 @@ const GanttChart = ({ data }) => {
       });
     }
   }, [timeline, timeWindow]);
-
-
-  // Combined function to apply all styling at once to prevent duplication
-  const applyTimelineStyling = () => {
-    addRouteIcons();
-    addBackgroundLines();
-  };
-
-    // Add home icons to the beginning of each route
-    const addRouteIcons = () => {
-      const routeElements = document.querySelectorAll('.vis-group');
-      console.log('routeElements', routeElements);
-      routeElements.forEach((route, index) => {
-        route.classList.add(ROUTE_COLORS[index % ROUTE_COLORS.length]);
-        
-        // Create and add home icon
-        const iconContainer = document.createElement('div');
-        iconContainer.className = 'route-start-icon';
-        iconContainer.innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-          </svg>
-        `;
-        
-        route.appendChild(iconContainer);
-      });
-    };
-  
-
-  // Add horizontal lines to each route
-  const addBackgroundLines = () => {
-    const routeElements = document.querySelectorAll('.vis-group');
-    console.log('routeElements', routeElements);
-    routeElements.forEach((route, index) => {
-      const line = document.createElement('div');
-      line.className = 'route-background-line';
-      line.style.zIndex = '5'; // Ensure it's behind events
-      
-      const foreground = route.querySelector('.vis-foreground');
-      if (foreground) {
-        if (foreground.firstChild) {
-          foreground.insertBefore(line, foreground.firstChild);
-        } else {
-          foreground.appendChild(line);
-        }
-      } else {
-        route.appendChild(line);
-      }
-    });
-  };
-  
   
   return (
     <div className="gantt-chart-container">
