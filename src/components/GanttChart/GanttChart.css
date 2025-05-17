@@ -6,7 +6,7 @@
 }
 
 .vis-item .vis-item-content {
-  padding: 5px 8px;
+  /* padding: 5px 8px; */
   font-size: 12px;
   color: white;
   font-weight: bold;
@@ -77,11 +77,32 @@
   border: none !important;
 }
 
-
 .vis-panel.vis-center .vis-content .vis-item {
   z-index: 30 !important;
   overflow: visible !important;
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
+}
+
+.timeline-item-content {
+  padding: 4px 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vis-panel.vis-center,
+.vis-panel.vis-center .vis-content,
+.vis-panel.vis-center .vis-itemset,
+.vis-panel.vis-center .vis-foreground {
+  z-index: 100 !important;
+  overflow: visible !important;
+}
+
+
+@media screen and (max-width: 600px) {
+  .vis-item .vis-item-content {
+    padding: 5px 0;
+  }
 }
