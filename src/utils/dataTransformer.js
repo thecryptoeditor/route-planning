@@ -25,7 +25,6 @@ export const transformDataForGantt = (data) => {
     groups.push({
       id: routeId,
       content: `Route ${routeIndex + 1}`,
-      // Optional additional data for display
       order: routeIndex
     });
     
@@ -47,7 +46,6 @@ export const transformDataForGantt = (data) => {
         start: startTime,
         end: endTime,
         title: `Order ${orderData.seq}: ${orderData.start_time} - ${orderData.end_time}`,
-        // Add custom styling and data
         style: `background-color: ${getOrderColor(routeIndex, orderIndex)};`,
         className: 'gantt-order-item'
       });
@@ -106,7 +104,7 @@ export const calculateTimeWindow = (items) => {
   
   items.forEach(item => {
     const itemStart = new Date(item.start);
-    const itemEnd = new Date(item.end || item.start); // For point items
+    const itemEnd = new Date(item.end || item.start);
     
     if (itemStart < earliest) earliest = itemStart;
     if (itemEnd > latest) latest = itemEnd;

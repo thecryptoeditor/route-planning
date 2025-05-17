@@ -35,10 +35,6 @@ const GanttChart = ({ data }) => {
     
     if (!timeline && containerRef.current) {
       const options = {
-        timeAxis: {
-          scale: 'minute',
-          step: 30
-        },
         showMinorLabels: true,
         stack: false,
         stackSubgroups: true,
@@ -93,11 +89,11 @@ const GanttChart = ({ data }) => {
       timeline.setItems(items);
     }
 
-    // Adding effects by CSS
+        // Adding effects by CSS
     setTimeout(() => {
       applyTimelineStyling();
     }, 100);
-
+    
   }, [ganttData, timeline]);
   
   useEffect(() => {
@@ -109,7 +105,7 @@ const GanttChart = ({ data }) => {
   }, [timeline, timeWindow]);
 
 
-  // Combined function to apply all styling at once to prevent duplication
+  // Combined function to apply all styling at once
   const applyTimelineStyling = () => {
     addRouteIcons();
     addBackgroundLines();
@@ -144,7 +140,7 @@ const GanttChart = ({ data }) => {
     routeElements.forEach((route, index) => {
       const line = document.createElement('div');
       line.className = 'route-background-line';
-      line.style.zIndex = '5'; // Ensure it's behind events
+      line.style.zIndex = '5';
       
       const foreground = route.querySelector('.vis-foreground');
       if (foreground) {
@@ -160,20 +156,15 @@ const GanttChart = ({ data }) => {
   };
 
   const addRouteBackgrounds = () => {
-    // Get all route containers
     const foreground = document.querySelector('.vis-foreground');
     const routeElements = foreground.querySelectorAll('.vis-group');
     
     routeElements.forEach(route => {
-      // Create a background for each route
       const background = document.createElement('div');
       background.className = 'route-row-background';
-      
-      // Insert at the beginning of the route element to ensure it's behind other elements
       route.insertBefore(background, route.firstChild);
     });
   };
-  
   
   return (
     <div className="gantt-chart-container">

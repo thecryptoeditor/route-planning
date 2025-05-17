@@ -1,12 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import './TimeRangeSlider.css';
 
-/**
- * A component for controlling the zoom level of the Gantt chart
- * @param {Object} props - Component props
- * @param {string} props.zoomLevel - Current zoom level ('large', 'medium', 'small')
- * @param {Function} props.onZoomChange - Function to call when zoom level changes
- */
 const TimeRangeSlider = ({ zoomLevel, onZoomChange }) => {
   const sliderRef = useRef(null);
   
@@ -30,14 +24,12 @@ const TimeRangeSlider = ({ zoomLevel, onZoomChange }) => {
   // Calculate slider value based on current zoom level
   const sliderValue = zoomLevel === 'large' ? 0 : zoomLevel === 'medium' ? 50 : 100;
   
-  // Update the slider fill based on value
   const updateSliderFill = (value) => {
     if (sliderRef.current) {
       sliderRef.current.style.setProperty('--value-percent', `${value}%`);
     }
   };
   
-  // Apply the initial fill
   useEffect(() => {
     updateSliderFill(sliderValue);
   }, [sliderValue]);

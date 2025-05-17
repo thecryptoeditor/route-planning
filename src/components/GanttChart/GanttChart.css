@@ -425,3 +425,8 @@
   border-color: #e53935 !important;
 }
 
+@media screen and (max-width: 600px) {
+  .vis-item .vis-item-content {
+    padding: 5px 0;
+  }
+}
