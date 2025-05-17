@@ -86,7 +86,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  z-index: 40;
   border: 1px solid #ddd;
 }
 
@@ -98,51 +98,52 @@
 
 .gantt-order-item {
   color: white;
+
 }
 
 .route-pink .vis-item {
-  background-color: #e91e63 !important;
+  color: #e91e63 !important;
 }
 
 .route-blue .vis-item {
-  background-color: #2196f3 !important;
+  color: #2196f3 !important;
 }
 
 .route-yellow .vis-item {
-  background-color: #ffc107 !important;
+  color: #ffc107 !important;
 }
 
 .route-green .vis-item {
-  background-color: #4caf50 !important;
+  color: #4caf50 !important;
 }
 
 .route-purple .vis-item {
-  background-color: #9c27b0 !important;
+  color: #9c27b0 !important;
 }
 
 .route-brown .vis-item {
-  background-color: #795548 !important;
+  color: #795548 !important;
 }
 
 .route-lime .vis-item {
-  background-color: #8bc34a !important;
+  color: #8bc34a !important;
 }
 
 .route-dark-green .vis-item {
-  background-color: #2e7d32 !important;
+  color: #2e7d32 !important;
 }
 
 .route-indigo .vis-item {
-  background-color: #3f51b5 !important;
+  color: #3f51b5 !important;
 }
 
 .route-navy .vis-item {
-  background-color: #1a237e !important;
+  color: #1a237e !important;
 }
 
 .vis-item.vis-range {
   /* height: 28px; */
-  border-radius: 14px;
+  border-radius: 6px!important;
 }
 
 .vis-item .timeline-item-content {
@@ -223,20 +224,13 @@
   border: none !important;
 }
 
-
-
-
-
-
-/* Till that ok */
-
 .route-row-background {
   position: absolute;
   top: 0px;
   bottom: 0px; 
   left: 0;
   right: 0;
-  background-color: #f2f3f5; 
+  background-color: #e7ecef; 
   border-radius: 20px; 
   z-index: 1;
 }
@@ -254,11 +248,9 @@
   visibility: hidden;
 }
 
-
-
 .route-background-line {
   position: absolute;
-  height: 6px;
+  height: 9px;
   top: 50%;
   transform: translateY(-50%);
   left: 32px;
@@ -267,9 +259,9 @@
   border-radius: 3px;
 }
 
-
 .route-pink .route-background-line {
   background-color: #e91e63;
+  color: #e91e63;
 }
 .route-blue .route-background-line {
   background-color: #2196f3;
@@ -399,7 +391,7 @@
 .vis-panel.vis-center .vis-content,
 .vis-panel.vis-center .vis-itemset,
 .vis-panel.vis-center .vis-foreground {
-  z-index: 10 !important;
+  /* z-index: 10 !important; */
   position: relative !important;
   overflow: visible !important;
 }
@@ -411,6 +403,7 @@
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
+  background-color: #fff;
 }
 
 
@@ -424,8 +417,6 @@
   overflow: visible !important;
   z-index: 30 !important;
 }
-
-
 
 .vis-item.vis-range.highlight-item .vis-item-content::after {
   background-color: #e53935 !important;

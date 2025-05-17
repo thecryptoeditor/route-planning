@@ -16,7 +16,6 @@ const ROUTE_COLORS = [
   'route-lime',
   'route-dark-green',
   'route-indigo',
-  // 'route-navy'
 ];
 
 const GanttChart = ({ data }) => {
@@ -36,6 +35,11 @@ const GanttChart = ({ data }) => {
     
     if (!timeline && containerRef.current) {
       const options = {
+        timeAxis: {
+          scale: 'minute',
+          step: 30
+        },
+        showMinorLabels: true,
         stack: false,
         stackSubgroups: true,
         verticalScroll: true,
@@ -43,7 +47,7 @@ const GanttChart = ({ data }) => {
         horizontalScroll: true,
         zoomKey: 'ctrlKey',
         orientation: 'top',
-        minHeight: '100vh',
+        minHeight: '600px',
         format: {
           minorLabels: {
             minute: 'h:mm a',
@@ -109,12 +113,13 @@ const GanttChart = ({ data }) => {
   const applyTimelineStyling = () => {
     addRouteIcons();
     addBackgroundLines();
+    addRouteBackgrounds();
   };
 
     // Add home icons to the beginning of each route
     const addRouteIcons = () => {
-      const routeElements = document.querySelectorAll('.vis-group');
-      console.log('routeElements', routeElements);
+      const foreground = document.querySelector('.vis-foreground');
+      const routeElements = foreground.querySelectorAll('.vis-group');
       routeElements.forEach((route, index) => {
         route.classList.add(ROUTE_COLORS[index % ROUTE_COLORS.length]);
         
@@ -151,6 +156,21 @@ const GanttChart = ({ data }) => {
       } else {
         route.appendChild(line);
       }
+    });
+  };
+
+  const addRouteBackgrounds = () => {
+    // Get all route containers
+    const foreground = document.querySelector('.vis-foreground');
+    const routeElements = foreground.querySelectorAll('.vis-group');
+    
+    routeElements.forEach(route => {
+      // Create a background for each route
+      const background = document.createElement('div');
+      background.className = 'route-row-background';
+      
+      // Insert at the beginning of the route element to ensure it's behind other elements
+      route.insertBefore(background, route.firstChild);
     });
   };
   
