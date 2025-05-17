@@ -12,7 +12,6 @@ A React application that displays a Gantt chart visualization for route planning
 - Visual representation of orders with:
   - Width (thickness) representing fixing time (duration)
   - Spacing proportional to time gaps between orders
-- Detailed route information in a tabular format
 
 ## Project Structure
 
@@ -25,6 +24,7 @@ src/
 │   └── Layout/         # Layout components
 ├── utils/              # Utility functions for data transformation and time handling
 ├── hooks/              # Custom React hooks
+├── app.js/             # Entry Point for UI
 └── mockData.js         # Sample route data
 ```
 
@@ -47,7 +47,7 @@ src/
 1. Clone the repository
    ```
    git clone https://github.com/thecryptoeditor/route-planning.git
-   cd gantt-route-planner
+   cd route-planning
    ```
 
 2. Install dependencies
