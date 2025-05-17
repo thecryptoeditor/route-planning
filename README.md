@@ -89,3 +89,12 @@ The application features a custom zoom control with three predefined levels:
 - Small: 1-hour view
 
 The zoom functionality is implemented using the vis-timeline's window API, adjusting the visible time range based on the selected zoom level.
+
+## UI/Screenshots
+
+### Desktop View
+![Alt text](./desktop.png "Desktop View")
+
+### Mobile View
+![Alt text](./mobile.png "Mobile View")
+
