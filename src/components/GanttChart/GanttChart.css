@@ -142,8 +142,8 @@
 }
 
 .vis-item.vis-range {
-  /* height: 28px; */
-  border-radius: 6px!important;
+  border-radius: 6px !important;
+  border-color: transparent !important;
 }
 
 .vis-item .timeline-item-content {
